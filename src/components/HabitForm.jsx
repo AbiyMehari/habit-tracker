@@ -2,45 +2,69 @@ import { useState } from "react";
 
 export default function HabitForm({ onAddHabit }) {
   const [name, setName] = useState("");
-  const [goal, setGoal] = useState("");
+  const [target, setTarget] = useState(1);
 
-  function handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    if (!name.trim()) return;
 
-    if (!name.trim() || !goal || goal <= 0) {
-      alert("Please enter a valid habit name and a positive goal number.");
-      return;
-    }
-
-    onAddHabit({ name: name.trim(), goal: Number(goal) });
+    onAddHabit({
+      id: Date.now(),
+      name,
+      target,
+      count: 0,
+      completed: false,
+    });
 
     setName("");
-    setGoal("");
-  }
+    setTarget(1);
+  };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col gap-3 p-4 border rounded-md shadow-sm max-w-md mx-auto mt-6"
+      className="mb-6 p-4 bg-white rounded-lg shadow"
     >
-      <input
-        type="text"
-        placeholder="Habit Name (e.g. Drink Water)"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="border p-2 rounded"
-      />
-      <input
-        type="number"
-        placeholder="Goal (times per day)"
-        value={goal}
-        onChange={(e) => setGoal(e.target.value)}
-        className="border p-2 rounded"
-        min="1"
-      />
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        Add New Habit
+      </h2>
+      <div className="mb-4">
+        <label
+          htmlFor="habit-name"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Habit Name
+        </label>
+        <input
+          id="habit-name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          placeholder="e.g., Drink water"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label
+          htmlFor="habit-target"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Daily Target
+        </label>
+        <input
+          id="habit-target"
+          type="number"
+          min="1"
+          value={target}
+          onChange={(e) => setTarget(parseInt(e.target.value) || 1)}
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          required
+        />
+      </div>
       <button
         type="submit"
-        className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200"
       >
         Add Habit
       </button>

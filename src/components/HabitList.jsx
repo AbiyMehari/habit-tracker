@@ -1,17 +1,30 @@
-// src/components/HabitList.jsx
-import HabitListItem from "./HabitListItem.jsx";
+import HabitListItem from "./HabitListItem";
 
-export default function HabitList({ habits, onDelete }) {
+export default function HabitList({
+  habits,
+  onIncrement,
+  onDecrement,
+  onDelete,
+}) {
   return (
-    <div className="max-w-md mx-auto mt-6 space-y-4 px-4">
+    <div>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Your Habits</h2>
       {habits.length === 0 ? (
-        <p className="text-center text-gray-500">
-          No habits yet. Add one above!
+        <p className="text-gray-500 text-center py-8">
+          No habits added yet. Add your first habit above!
         </p>
       ) : (
-        habits.map((habit) => (
-          <HabitListItem key={habit.id} habit={habit} onDelete={onDelete} />
-        ))
+        <div className="space-y-3">
+          {habits.map((habit) => (
+            <HabitListItem
+              key={habit.id}
+              habit={habit}
+              onIncrement={onIncrement}
+              onDecrement={onDecrement}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
