@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export default function HabitForm({ onAddHabit }) {
-  // State for form inputs
   const [name, setName] = useState("");
   const [target, setTarget] = useState(1);
 
@@ -9,13 +8,14 @@ export default function HabitForm({ onAddHabit }) {
     e.preventDefault();
     if (!name.trim()) return;
 
-    // Call parent component's function to add the new habit
     onAddHabit({
-      name: name.trim(), // Remove extra whitespace
-      target: target, // Use the selected target
+      id: Date.now(),
+      name,
+      target,
+      count: 0,
+      completed: false,
     });
 
-    // Reset form
     setName("");
     setTarget(1);
   };
@@ -25,9 +25,14 @@ export default function HabitForm({ onAddHabit }) {
       onSubmit={handleSubmit}
       className="mb-6 p-4 bg-white rounded-lg shadow"
     >
-      {/* Habit Name Input */}
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        Add New Habit
+      </h2>
       <div className="mb-4">
-        <label htmlFor="habit-name" className="block text-gray-700 mb-2">
+        <label
+          htmlFor="habit-name"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Habit Name
         </label>
         <input
@@ -35,15 +40,16 @@ export default function HabitForm({ onAddHabit }) {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           placeholder="e.g., Drink water"
           required
         />
       </div>
-
-      {/* Target Frequency Input */}
       <div className="mb-4">
-        <label htmlFor="habit-target" className="block text-gray-700 mb-2">
+        <label
+          htmlFor="habit-target"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Daily Target
         </label>
         <input
@@ -52,15 +58,13 @@ export default function HabitForm({ onAddHabit }) {
           min="1"
           value={target}
           onChange={(e) => setTarget(parseInt(e.target.value) || 1)}
-          className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           required
         />
       </div>
-
-      {/* Submit Button */}
       <button
         type="submit"
-        className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition-colors"
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200"
       >
         Add Habit
       </button>

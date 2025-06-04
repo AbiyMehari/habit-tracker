@@ -7,21 +7,24 @@ export default function HabitList({
   onDelete,
 }) {
   return (
-    <div className="space-y-3">
+    <div>
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">Your Habits</h2>
       {habits.length === 0 ? (
-        <p className="text-center text-gray-500 py-4">
+        <p className="text-gray-500 text-center py-8">
           No habits added yet. Add your first habit above!
         </p>
       ) : (
-        habits.map((habit) => (
-          <HabitListItem
-            key={habit.id}
-            habit={habit}
-            onIncrement={onIncrement}
-            onDecrement={onDecrement}
-            onDelete={onDelete}
-          />
-        ))
+        <div className="space-y-3">
+          {habits.map((habit) => (
+            <HabitListItem
+              key={habit.id}
+              habit={habit}
+              onIncrement={onIncrement}
+              onDecrement={onDecrement}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
       )}
     </div>
   );

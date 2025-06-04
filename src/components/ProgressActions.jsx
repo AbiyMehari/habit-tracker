@@ -1,34 +1,44 @@
-export default function ProgressActions({ habits, onResetDaily, onClearAll }) {
-  const completedHabits = habits.filter((h) => h.current >= h.target).length;
-  const totalHabits = habits.length;
-  const progressPercentage =
-    totalHabits > 0 ? Math.round((completedHabits / totalHabits) * 100) : 0;
+export default function ProgressActions({
+  habits,
+  onResetDailyProgress,
+  onClearAllHabits,
+}) {
+  const completedCount = habits.filter((h) => h.completed).length;
+  const totalCount = habits.length;
+  const completionPercentage =
+    totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
     <div className="mt-6 p-4 bg-white rounded-lg shadow">
+      <h2 className="text-xl font-semibold mb-4 text-gray-800">
+        Daily Progress
+      </h2>
+
       <div className="mb-4">
-        <h3 className="font-semibold mb-2">Daily Progress</h3>
-        <div className="w-full bg-gray-200 rounded-full h-4">
+        <div className="flex justify-between text-sm mb-1">
+          <span className="text-gray-600">
+            {completedCount} of {totalCount} habits completed
+          </span>
+          <span className="font-medium">{completionPercentage}%</span>
+        </div>
+        <div className="w-full bg-gray-200 rounded-full h-3">
           <div
-            className="bg-blue-600 h-4 rounded-full"
-            style={{ width: `${progressPercentage}%` }}
+            className="h-3 rounded-full bg-blue-500"
+            style={{ width: `${completionPercentage}%` }}
           ></div>
         </div>
-        <p className="text-sm text-gray-600 mt-1">
-          {completedHabits} of {totalHabits} habits completed (
-          {progressPercentage}%)
-        </p>
       </div>
+
       <div className="flex space-x-3">
         <button
-          onClick={onResetDaily}
-          className="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded hover:bg-gray-300 transition-colors"
+          onClick={onResetDailyProgress}
+          className="flex-1 py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded transition duration-200"
         >
-          Reset Daily
+          Reset Today
         </button>
         <button
-          onClick={onClearAll}
-          className="flex-1 bg-red-100 text-red-800 py-2 px-4 rounded hover:bg-red-200 transition-colors"
+          onClick={onClearAllHabits}
+          className="flex-1 py-2 px-4 bg-red-100 hover:bg-red-200 text-red-800 rounded transition duration-200"
         >
           Clear All
         </button>
