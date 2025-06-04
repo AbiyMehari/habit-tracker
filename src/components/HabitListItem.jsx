@@ -1,19 +1,49 @@
-// src/components/HabitListItem.jsx
-export default function HabitListItem({ habit, onDelete }) {
-  const { id, name, goal } = habit;
+export default function HabitListItem({
+  habit,
+  onIncrement,
+  onDecrement,
+  onDelete,
+}) {
+  const isComplete = habit.current >= habit.target;
 
   return (
-    <div className="flex justify-between items-center bg-white border rounded-md p-4 shadow-sm">
-      <div>
-        <h3 className="text-lg font-semibold">{name}</h3>
-        <p className="text-sm text-gray-500">Goal: {goal} times/day</p>
+    <div
+      className={`p-4 mb-3 rounded-lg shadow ${
+        isComplete ? "bg-green-100 border-l-4 border-green-500" : "bg-white"
+      }`}
+    >
+      <div className="flex justify-between items-center mb-2">
+        <h3 className="font-semibold text-lg">{habit.name}</h3>
+        <button
+          onClick={() => onDelete(habit.id)}
+          className="text-red-500 hover:text-red-700"
+        >
+          Delete
+        </button>
       </div>
-      <button
-        onClick={() => onDelete(id)}
-        className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-      >
-        Delete
-      </button>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <button
+            onClick={() => onDecrement(habit.id)}
+            disabled={habit.current <= 0}
+            className="px-3 py-1 bg-gray-200 rounded disabled:opacity-50"
+          >
+            -
+          </button>
+          <span className="font-medium">
+            {habit.current} / {habit.target}
+          </span>
+          <button
+            onClick={() => onIncrement(habit.id)}
+            className="px-3 py-1 bg-gray-200 rounded"
+          >
+            +
+          </button>
+        </div>
+        {isComplete && (
+          <span className="text-green-600 font-semibold">Completed!</span>
+        )}
+      </div>
     </div>
   );
 }
