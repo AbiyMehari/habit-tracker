@@ -3,9 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Habit Tracker</title>
+    <title>Habit Tracker (React 19 + Vite 5)</title>
+
+    <!-- PWA Metadata -->
+    <meta name="theme-color" content="#3B82F6" />
+    <meta
+      name="description"
+      content="Track your daily habits with React 19.1 and Tailwind CSS 4.1"
+    />
+
+    <!-- Favicon (generated via https://favicon.io) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Vite handles all script injection automatically -->
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- PWA Registration (optional) -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js");
+        });
+      }
+    </script>
   </body>
 </html>
