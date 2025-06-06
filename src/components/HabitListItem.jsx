@@ -64,8 +64,8 @@ export default function HabitListItem({
           disabled={habit.completed}
           className={`flex-1 py-1 px-3 rounded ${
             habit.completed
-              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
-              : "bg-blue-100 text-blue-700 hover:bg-blue-200"
+              ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+              : "bg-blue-100 text-blue-600 hover:bg-blue-200"
           }`}
         >
           +

@@ -40,8 +40,8 @@ export default function HabitForm({ onAddHabit }) {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          placeholder="e.g., Drink water"
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
+          placeholder="please enter habit name"
           required
         />
       </div>
@@ -58,13 +58,13 @@ export default function HabitForm({ onAddHabit }) {
           min="1"
           value={target}
           onChange={(e) => setTarget(parseInt(e.target.value) || 1)}
-          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
           required
         />
       </div>
       <button
         type="submit"
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200"
+        className="w-full bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 rounded transition duration-200"
       >
         Add Habit
       </button>
